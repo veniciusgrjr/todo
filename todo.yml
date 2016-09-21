@@ -1,0 +1,31 @@
+- hosts: all
+  sudo:	True
+  user:	vagrant
+  tasks:
+    - name: "Atualizando pacotes"
+      shell: sudo apt-get -y update
+
+    - name: "Instalando git"    ## ok
+      shell: sudo apt-get install -y git
+
+    - name: "Instalando Maven2"   
+      shell: sudo apt-get install -y maven2
+
+    - name: "Instalando openjdk-6-jdk"   
+      shell: sudo apt-get install -y openjdk-6-jdk
+
+    - name: "Clonando o projeto loja-virtual-devops.git"   ## ok
+      shell: git clone https://github.com/IBM-Bluemix/todo-apps.git
+
+    - name: "Export MAVEN_OPTS"   
+      shell: export MAVEN_OPTS=-Xmx256m   
+
+    - name: "Maven install"   
+      shell: sudo mvn install -f /home/vagrant/todo-apps/java/bluemix-todo-app/pom.xml
+
+    - name: "Maven run"   
+      shell: sudo mvn -P run -f /home/vagrant/tudo-apps/java/bluemix-todo-app/pom.xml
+
+
+
+
